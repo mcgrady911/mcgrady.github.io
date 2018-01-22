@@ -45,7 +45,7 @@ rss:
 footer:
   # Specify the date when the site was setup.
   # If not defined, current year will be used.
-  #since: 2015
+  #since: 2016 - 2018
 
   # Icon between year and copyright info.
   icon: user
@@ -93,13 +93,13 @@ index_with_subtitle: false
 # Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, question icon will be loaded.
 menu:
   home: / || home
-  #about: /about/ || user
-  #tags: /tags/ || tags
-  #categories: /categories/ || th
+  about: /about/ || user
+  tags: /tags/ || tags
+  categories: /categories/ || th
   archives: /archives/ || archive
   #schedule: /schedule/ || calendar
   #sitemap: /sitemap.xml || sitemap
-  #commonweal: /404/ || heartbeat
+  commonweal: /404.html || heartbeat
 
 # Enable/Disable menu icons.
 menu_icons:
@@ -127,9 +127,9 @@ scheme: Muse
 # Value before `||` delimeter is the target permalink.
 # Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, globe icon will be loaded.
 #social:
-  #GitHub: https://github.com/yourname || github
-  #E-Mail: mailto:yourname@gmail.com || envelope
-  #Google: https://plus.google.com/yourname || google
+  GitHub: https://github.com/mcgrady911 || github
+  E-Mail: mcgrady911.dev@gmail.com || envelope
+  # Google: https://plus.google.com/mcgrady911 || google
   #Twitter: https://twitter.com/yourname || twitter
   #FB Page: https://www.facebook.com/yourname || facebook
   #VK Group: https://vk.com/yourname || vk
@@ -142,6 +142,8 @@ social_icons:
   enable: true
   icons_only: false
   transition: false
+  GitHub: github
+  E-mail: e-mail
 
 # Blog rolls
 links_icon: link
@@ -277,7 +279,7 @@ custom_logo:
 # Available value:
 #    normal | night | night eighties | night blue | night bright
 # https://github.com/chriskempson/tomorrow-theme
-highlight_theme: normal
+highlight_theme: night
 
 
 # ---------------------------------------------------------------
@@ -406,7 +408,7 @@ gitment:
   count: true # Show comments count in post meta area
   lazy: false # Comments lazy loading with a button
   cleanly: false # Hide 'Powered by ...' on footer, and more
-  language: # Force language, or auto switch by theme
+  language: zh-Hans # Force language, or auto switch by theme
   github_user: # MUST HAVE, Your Github ID
   github_repo: # MUST HAVE, The repo you use to store Gitment comments
   client_id: # MUST HAVE, Github client id for the Gitment
