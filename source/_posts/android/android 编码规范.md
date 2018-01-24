@@ -1,5 +1,10 @@
-# Android 编码规范
-
+---
+title: Android 编码规范
+date: 2018-01-23 21:30:50
+updated: 2018-01-23 21:30:50
+tags: [android, tips]
+categories: android
+---
 
 
 ## 命名规范

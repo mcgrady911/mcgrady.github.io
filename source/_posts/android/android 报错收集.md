@@ -1,6 +1,10 @@
-# Android error collect
-
-
+---
+title: Android error collect
+date: 2018-01-23 21:30:50
+updated: 2018-01-23 21:30:50
+tags: [android, tips]
+categories: android
+---
 
 ### .9出错解决方案
 
