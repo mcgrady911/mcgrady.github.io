@@ -127,8 +127,8 @@ scheme: Muse
 # Value before `||` delimeter is the target permalink.
 # Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, globe icon will be loaded.
 social:
-  Github: https://github.com/mcgrady911 || gitHub
-  E-mail: mcgrady911.dev@gmail.com || e-mail
+  Github: https://github.com/mcgrady911 || github
+  E-Mail: mcgrady911.dev@gmail.com || envelope
   Google: https://plus.google.com/mcgrady911 || google
   Weibo: https://weibo.com/strivedream || weibo
   #Twitter: https://twitter.com/yourname || twitter
@@ -141,7 +141,7 @@ social:
 
 social_icons:
   enable: true
-  icons_only: false
+  icons_only: true
   transition: false
 
 # Blog rolls
