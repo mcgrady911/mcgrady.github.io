@@ -74,6 +74,11 @@ pagination_dir: page
 ## Themes: https://hexo.io/themes/
 theme: hexo-theme-next
 
+markdown:
+    render:
+      quotes: '“”‘’'
+
+
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
