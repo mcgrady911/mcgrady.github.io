@@ -126,10 +126,11 @@ scheme: Muse
 # Key is the link label showing to end users.
 # Value before `||` delimeter is the target permalink.
 # Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, globe icon will be loaded.
-#social:
-  # Github: "https://github.com/mcgrady911"
-  # E-mail: "mcgrady911.dev@gmail.com"
-  # Google: https://plus.google.com/mcgrady911 || google
+social:
+  Github: https://github.com/mcgrady911 || gitHub
+  E-mail: mcgrady911.dev@gmail.com || e-mail
+  Google: https://plus.google.com/mcgrady911 || google
+  Weibo: https://weibo.com/strivedream || weibo
   #Twitter: https://twitter.com/yourname || twitter
   #FB Page: https://www.facebook.com/yourname || facebook
   #VK Group: https://vk.com/yourname || vk
@@ -142,8 +143,6 @@ social_icons:
   enable: true
   icons_only: false
   transition: false
-  GitHub: github
-  E-mail: e-mail
 
 # Blog rolls
 links_icon: link
@@ -196,7 +195,7 @@ sidebar:
   b2t: false
 
   # Scroll percent label in b2t button.
-  scrollpercent: false
+  scrollpercent: true
 
   # Enable sidebar on narrow view (only for Muse | Mist).
   onmobile: false
