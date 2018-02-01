@@ -1,3 +1,13 @@
+---
+title: activity
+tags:
+  - android
+categories: android
+date: 2018-01-23 21:30:50
+updated: 2018-01-23 21:30:50
+---
+
+
 # Activity
 
 [TOC]
