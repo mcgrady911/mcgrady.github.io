@@ -1,29 +1,52 @@
 ---
-title: Android 编码规范
+title: android 编码规范
 date: 2018-01-23 21:30:50
 updated: 2018-01-23 21:30:50
 tags: [android, tips]
 categories: android
 ---
 
+## 摘要
+
+- 把密码和敏感数据放在`gradle.properties`中，并在版本控制中忽略掉
+
 
 ## 命名规范
 
+
 ### 资源命名
+#### 布局文件
+| **类型**      | **前缀**             |
+| ----------- | ------------------ |
+| Activity    | activity_          |
+| Fragment    | fragment_          |
+| Dialog      | dialog_            |
+| PopupWindow | popup_             |
+| Menu        | menu_              |
+| Adapter     | layout_item_/item_ |
 
-图标资源以`ic`为前缀，例如`ic_chat`，指聊天图标
+#### 图片资源
+| **前缀**    | **类型**      |
+| --------- | ----------- |
+| bg_xxx    | 背景图片        |
+| btn_xxx   | Button      |
+| ic_xxx    | Icon        |
+| bg_描述_状态  | 不同状态的背景     |
+| btn_描述_状态 | 不同状态的Button |
+| chx_描述_状态 | 选择框         |
 
-背景图片以 `bg` 为前缀，例如 `bg_login` ，指的是登录页的背景图
+#### 其他资源
+| **类型**  | **命名**        | **示例**            |
+| ------- | ------------- | ----------------- |
+| strings | 模块名_逻辑名称      | main_menu_about   |
+| colors  | 模块名_颜色名称      | main_info_bg_gray |
+| style   | 模块名_逻辑名称（驼峰法） | main_tabBottom    |
+| dimen   | 模块名_逻辑名称      | main_menu_padding |
 
-按钮图片以 `btn` 为前缀，例如 `btn_login `，指的是登录按钮的图片，不过这只有一种状态，需要加上状态的可以在后面添加，例如 `btn_login_pressed` ，表示登录按钮按下的图片
 
-Dialog	dialog_xx.xml
+### 布局使用
+- 合理布局，注意布局嵌套层次，有效运用`<merge>`、`<ViewStub>`、`<include>`标签
 
-PopupWindow	pw_xx.xml
-
-
-
-**合理布局，注意布局嵌套层次，有效运用`<merge>`、`<ViewStub>`、`<include>`标签**
 
 
 
@@ -54,15 +77,14 @@ public class MainActivity {
 
 
 
-### 其他的一些规范
+### 代码规范
 
 
 
 **使用单例可以减轻加载的负担、缩短加载的时间、提高加载的效率**，但并不是所有地方都适用于单例，简单来说，单例主要适用于一下三个方面：
-
-       	1. 控制资源的使用，通过线程同步来控制资源的并发访问
-        	2. 控制实例的产生，以达到节约资源的目的
-         	3. 控制数据的共享，在不建立关联的条件下，让多个不相关的进程或线程之间实现通信
+1. 控制资源的使用，通过线程同步来控制资源的并发访问
+2. 控制实例的产生，以达到节约资源的目的
+3. 控制数据的共享，在不建立关联的条件下，让多个不相关的进程或线程之间实现通信
 
 
 
