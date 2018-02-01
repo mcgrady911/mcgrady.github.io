@@ -86,3 +86,9 @@ deploy:
   type: git
   repository: git@github.com:mcgrady911/mcgrady911.github.io.git
   branch: master
+  
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
