@@ -1,5 +1,5 @@
 ---
-title: activity
+title: Activity
 tags:
   - android
 categories: android
@@ -10,12 +10,12 @@ updated: 2018-01-23 21:30:50
 
 # Activity
 
-[TOC]
 
----
+
 ## 什么是Activity
 
 - **Activity 是 Android 的应用程序组件，它提供给用户一个交互式的接口功能**。Activity本身是没有界面的，所以Activity创建了一个窗口，开发人员可以通过 `setContentView(view)` 接口把 UI 放到 Activity 创建的窗口上，当 Activity 指向全屏窗口时，也可以用其他方式实现：作为悬浮窗口，或者嵌入到其他的 Activity 中。**Activity 是单独的，用于处理用户操作**。
+
 
 
 
@@ -26,32 +26,42 @@ updated: 2018-01-23 21:30:50
 ![Activity 生命流程图](./0_1314838777He6C.gif)
 
 
+
 ### 其生命周期涉及的函数有：
 
 ```java
 public class Activity extends ApplicationContext {
 
-     protected void onCreate(Bundle savedInstanceState);     // 活动第一次启动的时候，触发该方法，可以在此时完成活动的初始化工作。
+     // 活动第一次启动的时候，触发该方法，可以在此时完成活动的初始化工作。
+     protected void onCreate(Bundle savedInstanceState);     
 
-     protected void onStart();     // “用户可见不可交互” 的状态，表示活动将被展现给用户。
+     // “用户可见不可交互” 的状态，表示活动将被展现给用户。
+     protected void onStart();     
 
-     protected void onRestart();   // 处于停止状态的活动需要再次展现给用户的时候，触发该方法。
+     // 处于停止状态的活动需要再次展现给用户的时候，触发该方法。
+     protected void onRestart();   
 
-     protected void onResume();    // “用户可交互” 状态，当活动和用户发送交互的时候，触发该方法。
+     // “用户可交互” 状态，当活动和用户发送交互的时候，触发该方法。
+     protected void onResume();    
 
-     protected void onPause();     // 当一个正在前台运行的活动因其他活动需要前台运行而转入后台运行时，触发该方法。
-                                   // (这时需要将活动的状态持久化，比如正在编辑的数据库记录等。)
+     /* 当一个正在前台运行的活动因其他活动需要前台运行而转入后台运行时，触发该方法。
+     (这时需要将活动的状态持久化，比如正在编辑的数据库记录等。)*/
+     protected void onPause();     
 
-     protected void onStop();      // 当活动不需要展示给用户的时候，触发该方法。
-                                   // 如果内存吃紧，系统会直接结束这个活动，而不会触发 onStop() 方法。
+     /* 当活动不需要展示给用户的时候，触发该方法。
+     如果内存吃紧，系统会直接结束这个活动，而不会触发 onStop() 方法。*/
+     protected void onStop();      
 
-     protected void onDestroy();   // 当活动销毁时，触发该方法。
-                                   // 如果内存吃紧，系统会直接结束这个活动，而不会触发 onDestroy() 方法。
+     /*当活动销毁时，触发该方法。如果内存吃紧，系统会直接结束这个活动，而不会触发 onDestroy() 方法。*/
+     protected void onDestroy();
 
-     protected void onDestroy();   // 系统调用该方法，允许活动保存之前的状态。(如：保存在一串字符串的光标所处位置等。)
-                                   // 通常情况下，开发者不需要重写该方法，在默认的实现中，已经提供了自动保存所涉及到的用户组件的所有状态信息
+     /*系统调用该方法，允许活动保存之前的状态。(如：保存在一串字符串的光标所处位置等。)
+     通常情况下，开发者不需要重写该方法，在默认的实现中，已经提供了自动保存所涉及到的用户组件的所有状态信息*/
+     protected void onDestroy();
  }
 ```
+
+
 
 ### Activity 生命周期的三个嵌套循环：
 
@@ -95,12 +105,17 @@ public class Activity extends ApplicationContext {
 
 - 当 Activity 在 Resumed 状态下，它是不会因系统内存不足而被直接杀死，只有进入 Paused 或 Stopped 状态下，在此期间如果系统内存不足，系统会直接结束这个 Activity，而不会触发 `onStop()` 和 `onDestory()`，**所以 `OnPause()` 是我们最大程度上保证 Activity 在销毁之前能够执行到的方法**。因此，如果某个 Activity 需要保存某些数据到数据库，应该在 `onPause()` 里编写持久化数据的代码。要注意应选择哪些信息必须保留在 `onPause()`，因为这个方法任何阻塞程序都会阻止过渡到下一个 Activity，这样给用户体验就感觉十分缓慢。
 
+
+
 ### Activity回调方法中，可以持续稳定状态的的三个状态是：
+
 - `Resumed`：这个状态下，Activity来到用户前台，并且完成与用户的交互。（有些情况下我们也称这个状态为运行态。）
 - `Paused`：在这个状态下，Activity被另外一个在前台运行的半透明的Activity或者被另外一个Activity部分盖住，在这个状态下Activity不能接受用户的输入，也不能执行任何代码 。
 - `Stopped`：在这个状态下，Activity被全部盖住，对用户完全不可见，可以认为已经在后台了。在停止状态下，Activity的所有实例，以及他的所有状态信息都被保存，可是不能执行任何代码。
 - 另外的状态（`onCreate()`和`onStart()`）是一个**过渡状态**，系统将迅速通过呼叫生命周期的回调函数来迁移到其生命周期的下一站。
   系统在呼叫了`onCreate()`->`onStart()`->`onResume()`指定你的应用的启动Activity
+
+
 
 ### Activity回调方法的作用：
 
@@ -127,7 +142,9 @@ public class Activity extends ApplicationContext {
 
 
 
+
 ## Activity 堆栈
+
 ![Activity 栈](http://upload-images.jianshu.io/upload_images/1810327-875591e5b766ebfd.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 - **每个Activity的状态是由它在Activity栈中的位置决定的(包含所有正在运行Activity的队列)。**
@@ -138,7 +155,9 @@ public class Activity extends ApplicationContext {
 
 
 
+
 ## Activity 的四种启动模式
+
 >设置Activity的启动模式，需在AndroidManifest.xml中对应的<activity>标签设置android:launchMode属性。
 ```xml
 <activity android:name=".MainActivity" android:launchMode="standard" />  
@@ -204,11 +223,3 @@ Activity1的`TaskID`为200，
 Activity3的`TaskID`为200，也就是说它被压到了Activity1启动的任务栈中。
 
 若在Other应用中打开Activity2，假设Other的`TaskID`为200，那么打开Activity，将会新建一个`TaskID`运行，假设`TaskID`为201，如果这是再从Activity2启动Activity1或者Activity3，则会在创建一个Task。因此，若操作步骤为`Other-->Activity2-->Activity1`，这个过程将设计到三个Task。
-
-[Demo](http://download.csdn.net/detail/shinay/4520903)
-
-
-
-
-
-

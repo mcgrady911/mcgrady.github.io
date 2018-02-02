@@ -1,15 +1,20 @@
-# Fragment
+---
+title: Fragment
+tags:
+  - android
+categories: android
+date: 2018-02-02 09:32:44
+---
 
-[TOC]
+# Fragment
 
 [版权声明](http://blog.csdn.net/lmj623565791/article/details/37970961)
 
----
+
 ## 什么是Fragment
 **使用Fragment可以让更加充分地利用屏幕空间**。
 **为了让界面可以在屏幕上更好地展示**，Android在3.0版本引入了Fragment(碎片)功能，它非常类似于Activity，可以像Activity一样包含布局。
 
----
 ## Fragment生命周期
 ### Fragment与Activity生命周期的对比
 ![Fragment](./Image.png) ![Fragment Activity](./20140719225005356.png)
@@ -30,7 +35,7 @@
 
 >注意：除了onCreateView()，如果重写了其他的所有方法，必须调用父类对于该方法的实现。
 
----
+
 ## 如何静态和动态的使用Fragment
 
 ### 静态的使用Fragment
@@ -117,20 +122,15 @@ public class MainActivity extends Activity {
 在不考虑会退栈的情况下，`remove`会销毁整个Fragment实例，而`detach`则只是销毁其视图结构（实例不会被销毁）。
 - 如果当前Activity一直存在，在不希望保留用户操作的时候，可以优先使用detach。
 
----
 ## 如何管理Fragment退回栈
 `FragmentTransaction.addToBackStack(String)`
 
----
 ## Fragment事务
 
----
 ## Fragment的一些特殊用途
 
----
 ## 没有布局的Fragment有何用处
 
----
 ## Fragment如何与Activity交互
 ### Fragment与Activity通信
 **所有的Fragment都是依附于Activity**
@@ -161,15 +161,13 @@ public class MainActivity extends Activity {
 	}
 ```
 
----
 ## 没有布局的Fragment的作用
 没有布局文件的fragment实际上是为了保存，当activity重启时，保存大量数据准备
 
----
 ## Fragment如何创建对话框
 [Android 官方推荐：DialogFragment创建对话框](http://blog.csdn.net/lmj623565791/article/details/37815413)
 
----
+
 ## Fragment如何与ActionBar集成
 
 
