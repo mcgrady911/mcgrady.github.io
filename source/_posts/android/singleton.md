@@ -1,3 +1,11 @@
+---
+{}
+date: 2018-02-02 10:00:31
+title: Singleton 单例模式
+tags:
+categories:
+---
+
 # Singleton 单例模式
 
 

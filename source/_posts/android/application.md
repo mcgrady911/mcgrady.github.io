@@ -1,8 +1,17 @@
+---
+{}
+date: 2018-02-02 10:03:44
+title: application
+tags:
+  - android
+categories: android
+---
+
 # Application
 
 
 
-**Application和Activity,Service一样是Android框架的一个系统组件，当Android程序启动时系统会创建一个Application对象，用来存储系统的一些信息**。
+**Application和Activity、Service一样是Android框架的一个系统组件，当Android程序启动时系统会创建一个Application对象，用来存储系统的一些信息**。
 
 Android系统自动会为每个程序运行时只创建一个Application类的对象，所以Application可以说是**单例（singleton）模式**的一个类。
 

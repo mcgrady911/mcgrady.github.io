@@ -260,18 +260,18 @@ BroadCastReceiverActivity.this.registerReceiver(smsBroadCastReceiver,intentFilte
 
 
 
-### 数据库相关
+## 数据库相关
 
 
 
-#### 如何将打开`resaw`目录中的数据库文件？
+### 如何将打开`resaw`目录中的数据库文件？
 
 - 在Android中不能直接打开`resaw`目录中的数据库文件，而需要在程序第一次启动时将该文件复制到手机内存或SD卡的某个目录中，然后再打开该数据库文件。
 - 复制的基本方法是使用`getResources().openRawResource`方法获得`resaw`目录中资源的`InputStream`对象，然后将该`InputStream`对象中的数据写入其他的目录中相应文件中。
 - 在AndroidSDK中可以使用`SQLiteDatabase.openOrCreateDatabase`方法来打开任意目录中的SQLite数据库文件。
 
 
-#### 什么时候用到数据库？
+### 什么时候用到数据库？
 
 - 本地数据库SQLite主要作用是存储和保留网络数据，保证无网络数据或网络异常下能够使用，同时减少网络流量的损耗。
 - 如果数据是已知的、静态的，可以在本地SQLite中存储、读取。这样不会因网络问题而降低效率和成功率。
@@ -279,7 +279,7 @@ BroadCastReceiverActivity.this.registerReceiver(smsBroadCastReceiver,intentFilte
 
 
 
-#### Android数据存储的方式有哪几类？
+### Android数据存储的方式有哪几类？
 
 **SharedPreferences**
 - 适用范围：保存少量的数据，且这些数据的格式非常简单，如：字符串、基本类型的值。比如：应用程序的各种配置信息（是否打开音效、是否使用震动效果、小游戏玩家积分等）、解锁口令密码等
@@ -315,14 +315,14 @@ SQLite是轻量级嵌入式数据库引擎，它支持 SQL 语言，并且只利
 
 
 
-#### 如何将SQLite数据库（`dictionary.db`文件）与apk文件一起发布？
+### 如何将SQLite数据库（`dictionary.db`文件）与apk文件一起发布？
 
 - 可以将dictionary.db文件复制到Eclipse Android工程中的`resaw`目录中。所有在resaw目录中的文件不会被压缩，这样可以直接提取该目录中的文件。
 
 
 
 
-#### 请继承`SQLiteOpenHelper`实现：
+### 请继承`SQLiteOpenHelper`实现：
 
 - 创建一个版本为1的`diaryOpenHelper.db`的数据库，同时创建一个`diary`表（包含一个`_id`主键并自增长，`topic`字符型100长度，`content`字符型1000长度）
 - 在数据库版本变化时请删除`diary`表，并重新创建出`diary`表。
@@ -357,7 +357,7 @@ public class DBHelperextends SQLiteOpenHelper{
 
 
 
-#### 在Android中使用`SQLiteOpenHelper`这个辅助类时，可以生成一个数据库，并可以对数据库版本进行管理的方法可以是？
+### 在Android中使用`SQLiteOpenHelper`这个辅助类时，可以生成一个数据库，并可以对数据库版本进行管理的方法可以是？
 
 - `getWriteableDatabase()`
 - `getReadableDatabase()`
@@ -365,19 +365,19 @@ public class DBHelperextends SQLiteOpenHelper{
 
 
 
-### 进程相关
+## 进程相关
 
 
 
-#### AsyncTask 的实现原理和使用的优缺点？
+### AsyncTask 的实现原理和使用的优缺点？
 
 
 
-#### Handler 异步实现的原理和使用的优缺点？
+### Handler 异步实现的原理和使用的优缺点？
 
 
 
-#### Handler 的机制原理？
+### Handler 的机制原理？
 
 - **Andriod提供了Handler和Looper来满足线程间的通信**。
 - Handler：构造Handler对象来与Looper沟通，以便push新消息到MessageQueue里;或者接收Looper从MessageQueue取出所送来的消息。
@@ -385,7 +385,7 @@ public class DBHelperextends SQLiteOpenHelper{
   - MessageQueue(消息队列)：用来存放线程放入的消息。
 
 
-#### 在单线程模型中Message、Handler、MessageQueue、Looper之间的关系？
+### 在单线程模型中Message、Handler、MessageQueue、Looper之间的关系？
 
 - 简单地说：Handler获取当前线程中的Looper对象，而Looper用来存放MessageQueue中取出的Message，再由Handler进行Message的分发和处理，按照先进先出执行。
 - MessageQueue（消息队列）：用来存放通过Handler发布的消息，通常附属于某一个创建它的线程，可以通过`Looper.myQueue()`得到当前线程的消息队列。
@@ -394,9 +394,9 @@ public class DBHelperextends SQLiteOpenHelper{
 - Message：消息的类型，在Handler类中的`handleMessage`方法中获取单个消息进行处理、
 - 在单线程模型下，为了解决线程通信问题，Android设计了MessageQueue，线程间可以通过该MessageQueue并结合Handler和Looper组件进行信息交换。
 
-#### 什么是线程池，作用是什么？
+### 什么是线程池，作用是什么？
 
-#### Android系统对对象提供了资源池有哪些？
+### Android系统对对象提供了资源池有哪些？
 
 - `Message`
   - 提供了消息池，有静态方法Obtain从消息池中取对象
@@ -405,11 +405,11 @@ public class DBHelperextends SQLiteOpenHelper{
 
 
 
-#### 为满足线程间通信，Android提供了？
+### 为满足线程间通信，Android提供了？
 
 - `Handler`和`Looper`
 
-#### Android跨进程通讯的方式？
+### Android跨进程通讯的方式？
 1. 访问其他应用程序的Activity
 ```java
 Intent callIntent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:12345678"));
@@ -427,7 +427,7 @@ startActivity(callIntent);
 4. AIDL
 
 
-#### 遇到下列哪种情况时需要把进程移到前台？
+### 遇到下列哪种情况时需要把进程移到前台？
 
 - 进程正在运行一个与用户交互的Activity ，它的onResume()方法被调用
 - 进程有一正在运行的BroadcastReceiver，它的onReceive()方法正在执行
@@ -435,11 +435,11 @@ startActivity(callIntent);
 - 进程有一个Service，该Service对应的Activity正在与用户交互
 
 
-#### 我们都知道Hanlder是线程与Activity通信的桥梁，如果线程处理不当，你的机器就会变得越慢，那么线程销毁的方法是？
+### 我们都知道Hanlder是线程与Activity通信的桥梁，如果线程处理不当，你的机器就会变得越慢，那么线程销毁的方法是？
 
 
 
-#### 下面哪种进程最重要，最后被销毁？
+### 下面哪种进程最重要，最后被销毁？
 
 - 服务进程
 - 后台进程
@@ -449,19 +449,19 @@ startActivity(callIntent);
   所以销毁的顺序是逆方向。
 
 
-#### AndroidDvm的进程和Linux的进程，应用程序的进程是否为同一个概念？
+### AndroidDvm的进程和Linux的进程，应用程序的进程是否为同一个概念？
 
 - DVM指`Dalvik`虚拟机，每一个Android应用程序都在它自己的进程中运行，都拥有一个独立的`Dalvik`虚拟机实例。而每一个DVM都是在Linux中的一个进程，所以说可以认为是同一个概念。
 
 
-#### 谈谈Android的IPC（进程间通信）机制
+### 谈谈Android的IPC（进程间通信）机制
 
 - IPC是内部进程通信的简称，是共享"命名管道"的资源。
 - 是为了让Activity和Service之间可以随时的进行交互，故在Android中该机制，只适用于Activity和Service之间的通信，类似于远程方法调用，类似于C/S模式的访问。通过定义AIDL接口文件来定义IPC接口。Servier端实现IPC接口，Client端调用IPC接口本地代理。
 
 
 
-#### Android 数据持久化主要有几种？
+### Android 数据持久化主要有几种？
 
 1. 保存到Shared Preferences
 2. 保存到手机内存
@@ -470,18 +470,18 @@ startActivity(callIntent);
 
 
 
-### 系统相关
+## 系统相关
 
 
 
-#### 简述Android应用程序结构是哪些？*
+### 简述Android应用程序结构是哪些？*
 
 - 应用运行时抛出了OutOfMemoryError
 - 应用运行时抛出了RuntimeException
 - 一般像空指针啊，可以看起`logcat`，然后对应到程序中来解决错误
 
 
-#### 如何避免应用闪退？
+### 如何避免应用闪退？
 
 
 ### ANR
@@ -533,25 +533,25 @@ startActivity(callIntent);
 1. 注意内存的使用和管理
 2. 使用Thread.UncaughtExceptionHandler接口
 
-#### Android本身的api并未声明会抛出异常，则其在运行时有无可能抛出Runtime异常，你遇到过吗?诺有的话会导致什么问题?如何解决?
+### Android本身的api并未声明会抛出异常，则其在运行时有无可能抛出Runtime异常，你遇到过吗?诺有的话会导致什么问题?如何解决?
 
 - 比如nullpointerException
 - 比如`textview.setText()`时，`textview`没有初始化。会导致程序无法正常运行出现ForceClose。打开控制台查看logcat信息找出异常信息并修改程序。
 
 
-#### Android程序运行时权限与文件系统权限的区别。运行时权限？
+### Android程序运行时权限与文件系统权限的区别。运行时权限？
 
 - Dalvik(android授权)
 - 文件系统linux内核授权
 
 
-#### 系统上安装了多种浏览器，能否指定某浏览器访问指定页面？请说明原由。
+### 系统上安装了多种浏览器，能否指定某浏览器访问指定页面？请说明原由。
 
 通过直接发送Uri把参数带过去，或者通过manifest里的intentfilter里的data属性。
 
 
 
-#### AIDL的全称是什么？如何工作？能处理哪些类型的数据？
+### AIDL的全称是什么？如何工作？能处理哪些类型的数据？
 
 - Android Interface Define Language
 - 当A进程要去调用B进程中的service时，并实现通信，通常是通过AIDL来操作的
@@ -575,7 +575,7 @@ ServiceConnection的`onServiceConnected(ComponentNamename,IBinderservice)`方法
 
 
 
-#### Android 使用AIDL提供公开服务接口，使得不同进程间可以相互通信。
+### Android 使用AIDL提供公开服务接口，使得不同进程间可以相互通信。
 
 - AIDL 对应的接口名称必须与AIDL文件名相同不然无法自动编译
 - AIDL 对应的接口方法不能加访问权限修复
@@ -588,7 +588,7 @@ ServiceConnection的`onServiceConnected(ComponentNamename,IBinderservice)`方法
 
 
 
-#### 请简述JNI在Android中的调用过程？
+### 请简述JNI在Android中的调用过程？
 
 - 安装和下载Cygwin，下载AndroidNDK
 - 在ndk项目中JNI接口的设计
@@ -597,34 +597,34 @@ ServiceConnection的`onServiceConnected(ComponentNamename,IBinderservice)`方法
 - 将动态链接库复制到java工程，在java工程中调用，运行java工程即可
 
 
-#### SIM卡的EF文件有何作用？
+### SIM卡的EF文件有何作用？
 
 - SIM卡的文件系统有自己规范，主要是为了和手机通讯，SIM本身可以有自己的操作系统
 - EF就是作存储并和手机通讯用的
 
 
-#### 什么是嵌入式实时操作系统？Android操作系统属于实时操作系统吗？
+### 什么是嵌入式实时操作系统？Android操作系统属于实时操作系统吗？
 
 - 嵌入式实时操作系统，是指当外界事件或数据产生时，能够接受并以足够快的速度予以处理，其处理的结果又能在规定的时间之内来控制生产过程或对处理系统作出快速响应，并控制所有实时任务协调一致运行的嵌入式操作系统。
 - 实时系统，主要用于工业控制、军事设备、航空航天等领域对系统的响应时间有苛刻的要求。（又可分为软实时和硬实时两种）
 - 而Android是基于Linux内核的，因此属于软实时。
 
 
-#### 一条最长的短信息约占多少byte？
+### 一条最长的短信息约占多少byte？
 
 - 中文70(包括标点)，英文160，160个字节。
 
 
-#### 如何防止apk包被反编译？
+### 如何防止apk包被反编译？
 
 - 代码混淆：java代码混淆工具 `proguard`
 - 二次打包
 
 
-####  DDMS和TraceView的区别？
+###  DDMS和TraceView的区别？
 
 - DDMS是一个程序执行查看器，在里面可以看见线程和堆栈等信息，TraceView是程序性能分析器。
-#### 什么是Context？
+### 什么是Context？
 - **它描述的是一个应用程序环境的消息，即上下文**。
 - 该类是一个抽象（abstract class）类。Android提供了该抽象类的集体实现类。
 - 通过它我们可以获取应用程序的资源和类，也包括一些应用级别操作。例如：启动一个Activity，发送广播，接收Intent信息等。
@@ -636,16 +636,16 @@ Context相关类的继承关系：
 
 
 
-#### Application、Activity、Service作为Context的区别?
+### Application、Activity、Service作为Context的区别?
 
 - 相同点：它们都简介继承了Context
 - 不同点：首先看它们的继承关系，通过对比可以发现，Activity比Service和Application多了一层继承关系ContextTemeWrapper，这是因为Activity有主题概念，而Service没有界面服务，Application更是一个抽象的东西，它也是通过Activity类呈现的。Context的真正实现都在ContextImpl中，也就是说Context的大部分方法调用都会转到ContextImpl中，而三者的创建均在ActivityThread中完成，**Activity启动的核心过程是在ActivityThread中完成的**，这里要说明的是，**Application和Service的创建也是在ActivityThread中完成的**。
-#### 一个应用程序中有多少Context？
+### 一个应用程序中有多少Context？
 总Context实例个数 = Service个数 + Activity个数 + 1(Application对应的Context实例)
 
 
 
-#### Intent传递数据时，下列的数据类型哪些可以被传递？
+### Intent传递数据时，下列的数据类型哪些可以被传递？
 
 - Serializable
 - Charsequence
@@ -654,7 +654,7 @@ Context相关类的继承关系：
 
 
 
-#### 在 Android 中， 在屏幕密度为160时， 1pt 大概等于__sp？***
+### 在 Android 中， 在屏幕密度为160时， 1pt 大概等于__sp？***
 
 - 在Android中，`1pt`大概等于`2.22sp`以上供参考，与分辨率无关的度量单位可以解决这一问题。
 - Android支持下列所有单位：
@@ -679,7 +679,7 @@ Context相关类的继承关系：
 
 
 
-#### 页面上现有`ProgressBar`控件，请用书写线程以10秒的的时间完成其进度显示工作。
+### 页面上现有`ProgressBar`控件，请用书写线程以10秒的的时间完成其进度显示工作。
 
 ```java
 private Progress BarprogressBar = null;
@@ -706,7 +706,7 @@ thread.start();
 ```
 
 
-#### 在Android中使用Menu时可能需要重写的方法有？
+### 在Android中使用Menu时可能需要重写的方法有？
 
 - `onCreateOptionsMenu()`
 - `onOptionsItemSelected()`
@@ -714,7 +714,7 @@ thread.start();
 
 
 
-#### 简要解释一下Activity、Intent、IntentFilter、Service、BroadcastReceiver？
+### 简要解释一下Activity、Intent、IntentFilter、Service、BroadcastReceiver？
 
 - Activity呈现了一个用户可以操作的可视化用户界面
 - Service不包含可见的用户界面，而是在后台无限地运行，可以连接到一个正在运行的服务中，连接后，可以通过服务中暴露出来的借口与其进行通信
@@ -726,7 +726,7 @@ thread.start();
 - 它是通过将Intent对象和目标的intentfilter相比较来完成这一工作的。一个component的intentfilter告诉android该component能处理的intent。intentfilter也是在manifest文件中声明的。
 
 
-#### Binder的理解
+### Binder的理解
 
 
 ## View

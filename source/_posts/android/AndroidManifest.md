@@ -1,4 +1,13 @@
-# AndroidManifest.xml
+---
+{}
+date: 2018-02-02 10:11:22
+title: AndroidManifest
+tags:
+  - android
+categories: android
+---
+
+# AndroidManifest
 
 
 
@@ -6,7 +15,6 @@
 
 ```xml
 <?xmlversion="1.0"encoding="utf-8"?>
-
 <manifest>
 
 	<!-- 基本配置 -->  
@@ -61,6 +69,8 @@
 </manifest>
 ```
 
+
+
 ### `<manifest>`
 
 **AndroidManifest.xml配置文件的根元素，必须包含一个`<application>`元素并且指定`xlmns:android`和`package`属性**。
@@ -108,7 +118,10 @@
 </manifest>
 ```
 
+
+
 ### `<permission>`
+
 权限声明标签，定义了供给`<uses-permission>`使用的具体权限，通常情况下我们不需要为自己的应用程序声明某个权限，除非需要给其他应用程序提供可调用的代码或者数据，这个时候你才需要使用`<permission>`标签。该标签中提供了`android:name`权限名标签，权限图标`android:icon`以及权限描述`android:description`等属性，另外还可以和`<permission-group>`以及`<permission-tree>`配合使用来构造更有层次的、更有针对性权限系统。
 
 `<permission>`标签语法范例如下：
@@ -122,7 +135,10 @@
 
 ```
 
+
+
 ### `<instrumentation>`
+
 用于声明`Instrumentation`测试类来监控Android应用的行为并应用到相关的功能测试中，其中比较重要的属性有：
 - 测试功能开关`android:functionalTest`
 - profiling调试功能开关`android:handleProfiling`
@@ -141,7 +157,10 @@
 
 ```
 
+
+
 ### `<uses-sdk>`
+
 `<uses-sdk>`标签还可以指定最高版本和目标版本，语法范例如下：
 ```xml
 <uses-sdk android:minSdkVersion="integer" 
@@ -149,7 +168,10 @@
     android:maxSdkVersion="integer" />
 ```
 
+
+
 ### `<uses-configuration>` `<uses-feature>`
+
 这两个标签都是用于描述应用所需要的硬件和软件特性，以便防止应用在没有这些特性的设备上安装。
 - `<uses-configuration>`标签中，比如有些设备带有`D-pad`或者`Trackball`这些特殊硬件，那么`android:reqFiveWayNav`属性就需要设置为`true`
 - 如果有一些设备带有硬件键盘，`android:reqHardKeyboard`也需要被设置为`true`。
@@ -168,7 +190,10 @@
     android:glEsVersion="integer" />
 ```
 
+
+
 ### `<uses-library>`
+
 用于指定Android应用可使用的用户库，除了系统自带的android.app、android.content、android.view和android.widget这些默认类库之外，有些应用可能还需要一些其他的Java类库作为支持，这种情况下我们就可以使用`<uses-library>`标签让ClassLoader加载其类库供Android应用运行时用。`<uses-library>`标签的用法很简单，以下是语法范例。
 
 ```xml
@@ -179,7 +204,10 @@
 >小贴士：
 >当运行Java程序时，首先运行JVM（Java虚拟机），然后再把Java类加载到JVM里头运行，负责加载Java类的这部分就叫做ClassLoader。当然，ClassLoader是由多个部分构成的，每个部分都负责相应的加载工作。当运行一个程序的时候，JVM启动，运行BootstrapClassLoader，该ClassLoader加载java核心API（ExtClassLoader和AppClassLoader也在此时被加载），然后调用ExtClassLoader加载扩展API，最后AppClassLoader加载CLASSPATH目录下定义的Class，这就是一个Java程序最基本的加载流程。
 
+
+
 ### `<supports-screens>`
+
 对于一些应用或者游戏来说，只能支持某些屏幕大小的设备或者在某些设备中的效果比较好，我们就会使用<supports-screens>标签来指定支持的屏幕特征。其中比较重要的属性包括：屏幕自适应属性android:resizeable，小屏（android:smallScreens）、中屏（android:normalScreens）、大屏（android:largeScreens）和特大屏（android:xlargeScreens）支持属性，按屏幕渲染图像属性android:anyDensity以及最小屏幕宽度属性android:requiresSmallestWidthDp等。
 
 `<supports-screens>`标签的语法范例如下。
@@ -225,7 +253,9 @@
 ```
 
 
+
 ### `<activity>`
+
 Activity活动组件（即界面控制器组件）的声明标签，Android应用中的每一个Activity都必须在`AndroidManifest.xml`配置文件中声明，否则系统将不识别也不执行该Activity。
 
 `<activity>`标签中常用的属性有：
@@ -298,6 +328,8 @@ Activity组件别名的声明标签，简单来说就是Activity的快捷方式�
 </activity-alias>
 ```
 
+
+
 ### `<intent-filter>`与`<action>`、`<category>`、`<data>`
 
 **`<intent-filter>`用于Intent消息过滤器的声明**，在前面的2.1.3.2节中我们已经对Android应用框架中的Intent消息作过比较详细的介绍，我们了解到Intent消息对于Android应用系统来说，是非常重要的“粘合剂”，`<intent-filter>`元素可以放在`<activity>`、`<activity-alias>`、`<service>`和`<receiver>`元素标签中，来区分可用于处理消息的Activity控制器、Service服务和广播接收器Broadcast Receiver。另外，我们还知道Intent消息还包含有名称、动作、数据、类别等几个重要属性。这点与该标签的写法也有一定的关系，比如`<intent-filter>`中必须包含有`<action>`元素，即用于描述具体消息的名称；`<category>`标签则用于表示能处理消息组件的类别，即该Action所符合的类别；而`<data>`元素则用于描述消息需要处理的数据格式，我们甚至还可以使用正则表达式来限定数据来源。当然，这些元素和标签的具体用法我们还需要慢慢学习。
@@ -319,6 +351,8 @@ Activity组件别名的声明标签，简单来说就是Activity的快捷方式�
 </intent-filter>
 ```
 
+
+
 ## `<meta-data>`
 
 **用于存储预定义数据**，和`<intent-filter>`类似，`<meta-data>`也可以放在`<activity>`、`<activity-alias>`、`<service>`和`<receiver>`这四个元素标签中。**Meta数据一般会以键值对的形式出现**，个数没有限制，而这些数据都将被放到一个Bundle对象中，程序中我们则可以使用`ActivityInfo`、`ServiceInfo`甚至`ApplicationInfo`对象的`metaData`属性中读取。假设我们在一个Activity中定义了一个`<meta-data>`元素。
@@ -334,6 +368,8 @@ ActivityInfo info = this.getPackageManager()
 String testData = info.metaData.getString("testData");
 System.out.println("testData:" + testData);
 ```
+
+
 
 ### `<service>`
 
@@ -352,7 +388,6 @@ Service服务组件的声明标签，**用于定义与描述一个具体的Andro
     android:name="string"
     android:permission="string"
     android:process="string" >
-... ...
 </service>
 ```
 
@@ -366,7 +401,7 @@ Boardcast Receiver广播接收器组件的声明标签，**用于定义与描述
 - 接收器开关`android:enabled`
 
 以下是`<receiver>`标签的语法范例：
-```xml`
+```xml
 <receiver android:enabled=["true" | "false"]
     android:exported=["true" | "false"]
     android:icon="drawable resource"
@@ -374,9 +409,10 @@ Boardcast Receiver广播接收器组件的声明标签，**用于定义与描述
     android:name="string"
     android:permission="string"
     android:process="string" >
-... ...
 </receiver>
 ```
+
+
 
 ### `<provider>`与`<grant-uri-permission>`
 
@@ -386,7 +422,8 @@ Boardcast Receiver广播接收器组件的声明标签，**用于定义与描述
 - 具体的读、写权限，即`android:readPermission`和`android:writePermission`等。
 
 以下是`<provider>`标签的语法范例：
-​```xml
+
+```xml
 <provider android:authorities="list"
     android:enabled=["true" | "false"]
     android:exported=["true" | "false"]
@@ -401,9 +438,6 @@ Boardcast Receiver广播接收器组件的声明标签，**用于定义与描述
     android:readPermission="string"
     android:syncable=["true" | "false"]
     android:writePermission="string" >
-... ...
 </provider>
 ```
-
-
 
