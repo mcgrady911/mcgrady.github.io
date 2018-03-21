@@ -9,10 +9,6 @@ updated: 2018-01-23 21:30:50
 
 
 
-# Activity
-
-
-
 ## 什么是Activity
 
 - **Activity 是 Android 的应用程序组件，它提供给用户一个交互式的接口功能**。Activity本身是没有界面的，所以Activity创建了一个窗口，开发人员可以通过 `setContentView(view)` 接口把 UI 放到 Activity 创建的窗口上，当 Activity 指向全屏窗口时，也可以用其他方式实现：作为悬浮窗口，或者嵌入到其他的 Activity 中。**Activity 是单独的，用于处理用户操作**。
@@ -22,13 +18,7 @@ updated: 2018-01-23 21:30:50
 
 ## Activity 的生命周期
 
-[Activity 具有自己的生命周期（由系统控制生命周期，程序无法改变，但可以用 `onSaveInstanceState()` 保存状态）。](http://www.cnblogs.com/feisky/archive/2010/01/01/1637427.html)
-
 ![Activity 生命流程图](./0_1314838777He6C.gif)
-
-
-
-### 其生命周期涉及的函数有：
 
 ```java
 public class Activity extends ApplicationContext {
@@ -45,15 +35,16 @@ public class Activity extends ApplicationContext {
      // “用户可交互” 状态，当活动和用户发送交互的时候，触发该方法。
      protected void onResume();    
 
-     /* 当一个正在前台运行的活动因其他活动需要前台运行而转入后台运行时，触发该方法。
-     (这时需要将活动的状态持久化，比如正在编辑的数据库记录等。)*/
+     /* 表示activity正在停止。
+     此时可停止动画或将活动的状态持久化，比如正在编辑的数据库记录等。*/
      protected void onPause();     
 
-     /* 当活动不需要展示给用户的时候，触发该方法。
-     如果内存吃紧，系统会直接结束这个活动，而不会触发 onStop() 方法。*/
+     /* 表示activity即将停止，可以做一些稍微重量级的回收工作（不能太耗时）。
+     （如果内存吃紧，系统会直接结束这个活动，而不会触发 onStop() 方法）*/
      protected void onStop();      
 
-     /*当活动销毁时，触发该方法。如果内存吃紧，系统会直接结束这个活动，而不会触发 onDestroy() 方法。*/
+     /*表示activity即将被销毁，可以做一些回收工作和最终的资源释放。
+     （如果内存吃紧，系统会直接结束这个活动，而不会触发 onDestroy() 方法）*/
      protected void onDestroy();
 
      /*系统调用该方法，允许活动保存之前的状态。(如：保存在一串字符串的光标所处位置等。)
@@ -108,41 +99,6 @@ public class Activity extends ApplicationContext {
 
 
 
-### Activity回调方法中，可以持续稳定状态的的三个状态是：
-
-- `Resumed`：这个状态下，Activity来到用户前台，并且完成与用户的交互。（有些情况下我们也称这个状态为运行态。）
-- `Paused`：在这个状态下，Activity被另外一个在前台运行的半透明的Activity或者被另外一个Activity部分盖住，在这个状态下Activity不能接受用户的输入，也不能执行任何代码 。
-- `Stopped`：在这个状态下，Activity被全部盖住，对用户完全不可见，可以认为已经在后台了。在停止状态下，Activity的所有实例，以及他的所有状态信息都被保存，可是不能执行任何代码。
-- 另外的状态（`onCreate()`和`onStart()`）是一个**过渡状态**，系统将迅速通过呼叫生命周期的回调函数来迁移到其生命周期的下一站。
-  系统在呼叫了`onCreate()`->`onStart()`->`onResume()`指定你的应用的启动Activity
-
-
-
-### Activity回调方法的作用：
-
-回调方法的作用，就是通知我们Activity生命周期的改变，然后我们可以处理这种改变。
-
-#### 1. onCreate()
-- 主要是初始化各控件和一些全局变量、设置监听等。
-
-- 在Activity的一次生命周期中，`onCreate()` 只会执行一次。在 Paused 和 Stopped 状态下，这些控件、监听和全局变量也不会丢失。即便是内存不足被系统回收了，再次 Recreate，又是一次新的生命周期，`onCreate()` 还会执行。
-
-- 还可以在 `onCreate()` 中执行数据操作，比如：从 Cursor 中检索数据等等，但如果你每次进入这个 Activity 都可以需要更新数据，那么最好放在 `onStart()` 里面。(这个需要根据实际情况来定)
-
-#### 2. onDestory()
-- 主要执行一些最终的清理工作，比如：在这个 Activity 的 `onCrete()` 中开启的某个线程，那么要在 `onDestroy()` 中确定它是否结束，如果没有就结束它。
-
-#### 3. onStart() onRestart() onStop() onResume() onPause()
-- Activity 进入 Stopped 状态后，它极有可能被系统回收，在某些极端情况下，系统可能是直接杀死应用的进程，而不是调用 `onDestroy()`，**所以我们需要在 `onStop()` 中尽可能的释放那些用户展示不需要使用的资源，防止内存泄露**。
-
-- 尽管 `onPause()` 在 `onStop()` 之前执行，因为 `onPause()` 不能阻塞转变到下一个 Activity，**所以 `onPause()` 只适合做一些轻量级的操作**，更多的耗时资源的操作还是要放在 `onStop()` 里。
->例如：对数据库保存，需要用到的数据库操作。
->例如：停止动画、取消 Broadcast Receivers。当然相应的需要在 onResume() 中重启或初始化等等。`
-
-- 有时需要在 `onPause()` 中判断用户是要结束这个 Activity，还是暂时离开，以便区分处理，这时可以进行逻辑判断用户的行为。
-
-
-
 
 ## Activity 堆栈
 
@@ -163,57 +119,51 @@ public class Activity extends ApplicationContext {
 ```xml
 <activity android:name=".MainActivity" android:launchMode="standard" />  
 ```
-### 1. standard`标准模式`
-**在这个模式下，每次激活Activity时都会创建Activity实例，并放入任务栈中。因此，可有多个相同的实例，也允许多个相同的Activity叠加。**
 
->例如：若当前MainActivity，有个转跳OtherActivity的按钮，每次出发按钮便会new一个OtherActivity实例叠加在MainActivity之上，依次循环OtherActivity不断的叠加在上一个Activity之上；当用户触发`back`消息时，Activity会一招栈顺序依次推出。
 
-### 2. singleTop
-**可有多个实例，但不允许多个相同的Activity叠加。**
+### standard
 
-即：当Activity位于栈顶时，再通过Intent转跳到本身Activity，则不会创建一个新的实例压入栈中。
+**标准模式，每次启动activity都会创建新的实例，不论该实例是否已存在。**
 
-例如：有两个相同内容的Activity1、Activity2，都有相互转跳的按钮，唯一不同的是`Activity1为standard模式，Activity2为singleTop模式`。
+因此，一个任务栈中可以有多个实例，每个实例也可以属于不同的任务栈。
 
-若打开顺序为：
+
+
+### singleTop
+
+**栈顶复用模式，可有多个实例，但不允许多个相同的Activity叠加。**
+
+若当前activity已位于任务栈的栈顶，那么此时activity不会被重建，同时`onNewIntent(Intent intent)`方法被回调（通过方法参数可以取出当前请求的信息）；如果当前activity的实例不是位于栈顶，那么新的activity仍然会重新创建。
+
+例如：
 ```flow
-a1=>end: Activity1
-a2=>end: Activity2
-a3=>end: Activity2
-  
+a1=>end: A (standard)
+a2=>end: B (standard)
+a3=>end: B (standard)
+
 a1(right)->a2(right)->a3(right)
 ```
-则栈中的压入顺序为：
+
 ```flow
-a1=>end: Activity1
-a2=>end: Activity2 
-a3=>end: Activity2.onNewIntent()
-  
+a1=>end: A (standard)
+a2=>end: B (singleTop)
+a3=>end: B.onNewIntent()
+
 a1(right)->a2(right)->a3(right)
 ```
-后一次启动Activity2的操作，实际只调用了前一个的onNewIntent()方法。
 
-若打开顺序为：
-```flow
-a1=>end: Activity1
-a2=>end: Activity2
-a11=>end: Activity1
-a22=>end: Activity2
-  
-a1(right)->a2(right)->a11(right)->a22(right)
-```
 
-则栈中的压入顺序与打开顺序相同。
 
-### 3. singleTask
-**在Task栈中将有且只有一个该Activity的实例。**
+### singleTask
 
-即：若Activity不存在，则会在当前Task创建一个新的实例，若存在，则会把Task中在其之上的求他Activity Destory掉并调用它的`onNewIntent()`方法。
+**栈内复用模式，任务栈中有且只有一个该activity的实例。**
+若activity不存在，则会在当前任务栈创建一个新的实例，若存在，则会把任务栈中在其之上的求他activity 销毁掉并调用它的`onNewIntent()`方法。
 
-例如：若有三个Activity1、Activity2（singleTask）、Activity3，可相互启动，那么无论这个程序如何启动Activity，但Activity2有且只有一个，并且这三个Activity都在同一个Task里。
 
-### 4. singleInstance
-**有且只有一个实例，并且这个实例将独立运行在Task中，不允许有别的Activity存在**。
+
+### singleInstance
+
+**单实例模式，有且只有一个实例，并且这个实例将独立运行在Task中，不允许有别的Activity存在**。
 
 例如: 有三个Activity1、Activity2、Activity3，可相互启动，
 其中Activity2为`singeIntent`模式，假设程序从Activity开始运行，

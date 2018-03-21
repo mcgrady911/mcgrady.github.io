@@ -62,13 +62,9 @@ categories: android
 
 ```java
 /**
- * <pre>
- *     author : developer
- *     e-mail : xxx@xx
- *     time   : 2017/08/13
- *     desc   : xxxx描述
- *     version: 1.0
- * </pre>
+ * @author: mcgrady
+ * @date: 2016/7/1
+ * @des: xxxx
  */
 public class MainActivity {
        ...
