@@ -165,12 +165,10 @@ a1(right)->a2(right)->a3(right)
 
 **单实例模式，有且只有一个实例，并且这个实例将独立运行在Task中，不允许有别的Activity存在**。
 
-例如: 有三个Activity1、Activity2、Activity3，可相互启动，
-其中Activity2为`singeIntent`模式，假设程序从Activity开始运行，
-Activity1的`TaskID`为200，
-那么当Activity1启动Activity2时，Activity2强会新启动一个Task，
-及Activity2与Activity1不在同一个Task中运行。
-假设Activity2的`TaskID`为201，再从Activity2启动Activity3时，
-Activity3的`TaskID`为200，也就是说它被压到了Activity1启动的任务栈中。
 
-若在Other应用中打开Activity2，假设Other的`TaskID`为200，那么打开Activity，将会新建一个`TaskID`运行，假设`TaskID`为201，如果这是再从Activity2启动Activity1或者Activity3，则会在创建一个Task。因此，若操作步骤为`Other-->Activity2-->Activity1`，这个过程将设计到三个Task。
+
+## IntentFilter的匹配规则
+
+### action
+### category
+### data
