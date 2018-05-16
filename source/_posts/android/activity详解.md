@@ -15,7 +15,7 @@ categories: android
 
 ## Activity 的生命周期
 
-![Activity 生命流程图](./images/android/activity_life.png)
+![activity_life](..\images\android\activity_life.png)
 
 ```java
 public class Activity extends ApplicationContext {
