@@ -1,6 +1,18 @@
-# Android Studio 3.0
+# Android Studio
 
-## 依赖变化
+## 模拟器INSTALL_FAILED_NO_MATCHING_ABIS 解决方案
+```groovy
+splits {
+        abi {
+            enable true
+            reset()
+            include 'x86', 'armeabi-v7a','x86_64'
+            universalApk true
+        }
+    }
+```
+
+## android studio 3.0依赖变化
 
 ### compile（api）
 这种是我们最常用的方式，使用该方式依赖的库将会参与编译和打包。

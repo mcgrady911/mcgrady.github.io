@@ -7,6 +7,8 @@ date: 2018-01-23 21:30:50
 updated: 2018-03-27 09:30:50
 ---
 
+[TOC]
+
 ## 摘要
 
 1. **观察者模式**
@@ -372,6 +374,8 @@ Observable.concat(memoryCache, diskCache, networkCache)
                 });
 ```
 
+**map()**
+用于转换一组数据
 
 
 **flatMap()**
@@ -379,6 +383,9 @@ Observable.concat(memoryCache, diskCache, networkCache)
 **concatMap()**
 
 **join()**
+
+### 阻塞操作
+**toList()**
 
 ### 其他操作
 
