@@ -1,6 +1,9 @@
-# Android Studio
+# About Android
+
+
 
 ## 模拟器INSTALL_FAILED_NO_MATCHING_ABIS 解决方案
+
 ```groovy
 splits {
         abi {
@@ -12,7 +15,9 @@ splits {
     }
 ```
 
-## android studio 3.0依赖变化
+
+
+## AndroidStudio 3.0 依赖变化
 
 ### compile（api）
 这种是我们最常用的方式，使用该方式依赖的库将会参与编译和打包。
@@ -34,3 +39,13 @@ splits {
 只在debug模式的编译和最终的debug apk打包时有效。
 
 ### releaseCompile（releaseImplementation）
+
+
+
+## Android设备的CPU类型（通常称为“APIs”）
+
+- **armeabiv-v7a**：第7代及以上的 ARM 处理器。2011年15月以后的生产的大部分Android设备都使用它.
+- **arm64-v8a**：第8代、64位ARM处理器，很少设备，三星 Galaxy S6是其中之一。
+- **armeabi**：第5代、第6代的ARM处理器，早期的手机用的比较多。
+- **x86**：平板、模拟器用得比较多。
+- **x86_64**：64位的平板。
