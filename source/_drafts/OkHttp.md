@@ -59,3 +59,8 @@ int writeTimeout; //write 超时
 #### enqueue 
 异步请求
 
+
+
+## Retrofit
+
+![](https://img-blog.csdn.net/20171231162846585?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZ3VvaGFvc2ly/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
