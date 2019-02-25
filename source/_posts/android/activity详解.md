@@ -5,8 +5,6 @@ tags: android
 categories: android
 ---
 
-
-
 ## 应用组件
 
 ### Activity
@@ -89,38 +87,16 @@ a3=>end: B.onNewIntent()
 a1(right)->a2(right)->a3(right)
 ```
 
-### Service
-
-### BroadcastReceiver
-
-- `onReceive()` 方法中不能进行复杂工作否则会导致 ANR，`onReceive()` 方法一旦执行完，系统可能就认为这个广播接收器已经没用了，随时会杀掉包含这个广播接收器的进程，包括这个进程启动的线程。使用 `goAsync()` 方法可以在 `PendingResult#finish()` 方法执行前为广播接收器的存活争取更多的时间，但最好还是使用 `JobScheduler` 等方式进行长时间处理工作
-- `sendBroadcast()`发送常规广播，广播接收器收到的顺序是不可控的。
-- `sendOrderedBroadcast()`发送有序广播，根据广播接收器的优先级有序的传递广播，相同优先级的顺序不可控，广播接收器可以选择继续传递给下一个，也可以选择直接丢掉。
-- 为了保证广播的`action`全局唯一性，最好声明应用的包名成静态字符串常量作为前缀。
-
-### ContentProvider
-
-
-
-## 激活组件
-
-应用不能也不应该直接激活其它应用的任意一个组件，但系统可以，通过发送意图（**Intent**）激活你的组件。
-
-### Intent（意图）
-
-如果**Intent通过组件类名显式指明了唯一的目标组件，那么这个Intent就是显式的**，否则就是隐式，**隐式Intent一般只描述执行动作的类型**，必要时可以携带数据，系统会根据Intent的描述决定激活哪个组件，如果有多个组件符号激活条件，系统一般会弹出选择框让用选择到底激活哪个组件。
-
-### IntentFilter
-
-
-
-## 序列化
-
-### Parcelable
-Parcelable 对象用来在进程间、Activity 间传递数据，保存实例状态也是用它，Bundle 是它的一个实现，最好只用它存储和传递少量数据，别超过 50k，否则既可能影响性能又可能导致崩溃
-
 
 
 ## 其它
+
+### activity之间的通信方式有哪些？
+- Intent
+- 类的静态变量
+- 全局变量
+- SharedPreference
+- SQLite
+- File
 
 - `Activity` 可以通过 `getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)` 保持屏幕常亮，这是最推荐、最简单、最安全的保持屏幕常亮的方法，给 view 添加 `android:keepScreenOn="true"` 也是一样的。这个只在这个 `Activity` 生命周期内有效，所以大可放心，如果想提前解除常亮，只需要清除这个 flag 即可。
