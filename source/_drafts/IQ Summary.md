@@ -5,15 +5,6 @@
 ## Android相关
 
 ### 四大组件
-
-#### Activity
-##### 1. Activity生命周期，有哪些启动模式，以及应用场景？
-##### 2. 写一个SingTop，有哪三个条件？
-##### 3. Activity启动模式的应用场景？
-- standard：创建一个新的Activity
-- singleTop：栈顶不是该类型的Activity，创建一个行的Activity。否则，onNewIntent。
-- singleTask：回退栈中没有该类型的Activity，创建Activity，否则，onNewIntent + ClearTop。
-- singleInstance：回退栈中只有这个Activity，没有其他Activity。
 ##### 1. 请描述四大组件的生命周期和简单用法？
 ```java
 activity
@@ -48,22 +39,37 @@ contentProvider
 Uri uri = Uri.pase("content://xxx");
 ContentResoler resoler = new ContentResoler();
 resoler.insert(uri, contentValue);
-
-
 ```
+#### Activity
+##### 1. Activity生命周期，有哪些启动模式，以及应用场景？
+##### 2. 写一个SingTop，有哪三个条件？
+##### 3. Activity启动模式的应用场景？
+- standard：创建一个新的Activity
+- singleTop：栈顶不是该类型的Activity，创建一个行的Activity。否则，onNewIntent。
+- singleTask：回退栈中没有该类型的Activity，创建Activity，否则，onNewIntent + ClearTop。
+- singleInstance：回退栈中只有这个Activity，没有其他Activity。
+##### 4. 两个Activity之间跳转时必然会执行的时哪几个方法？
+##### 5. 请描述横竖屏切换时Activity的生命周期变化？
+##### 6. 如何保存Activity的状态？
+
 
 #### Service
-#####1.  service两种启动方式有什么区别？
+##### 1.  service有几种启动方式？分别有什么区别？
+##### 2. 描述service的生命周期？
+##### 3. service是否在主线程中执行？
+##### 4. service里可以弹toast吗？
+##### 5. service里可以执行耗时操作吗？
 
 #### Broadcast
 ##### 1. 注册广播的方式有几种？各有什么优缺点？
 
 #### ContentProvider
+##### 1. 如何实现数据共享？
+##### 2. ContentProvider、ContentResolver、ConentObserver之间的关系
 
 ### View
 
 #### 1. Activity、Window、View 三者的差别?
-
 Activity 控制单元，Window 承载模型，View 显示视图
 
 Activity在onCreate中调用attach方法，在attach方法中创建一个window对象。window对象创建时并没有创建DocerView对象，而是当用户在Activity中调用setContentView方法之后，接着转到window的setContentView，这时会检查DecorView是否存在，如果不存在则创建DecorView对象，然后把用户自己的View添加到DecorView中。
@@ -94,6 +100,9 @@ AlertDialog是**非阻塞式**对话框，AlertDialog弹出时，后台还可以
 7. 在自定义控件中进行读取（构造方法拿到attr.xml文件值）
 8. 覆写onMeasure
 9. 覆写onLayout
+
+#### 4. getWidth()和getMeasureWidth()的区别？
+
 
 
 ## 序列化
@@ -301,7 +310,12 @@ cat traces.txt
 
 
 ## 性能优化相关
-### OOM
+### 内存泄漏（OOM）
+#### 1. 描述下内存泄漏的场景和解决方法？
+#### 2. 如何避免OOM？
+
+### JNI
+
 
 
 ## 其他
