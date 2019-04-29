@@ -275,7 +275,8 @@ SpannableStringBuilder 长度可变
 #### 1. ANR产生的原因?
 1. 主线程中做了非常耗时的操作 
 2. 在BroadcastReceiver里做耗时的操作或计算 
-3. CPU使用过高 4.发生了死锁 等等。
+3. CPU使用过高 
+4. 发生了死锁 等等。
 
 #### 2. 如何定位和分析ANR？
 一般情况下，如果有ANR发生，系统都会记录在`/data/anr/traces.txt`文件
