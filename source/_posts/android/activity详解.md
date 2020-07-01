@@ -92,6 +92,7 @@ a1(right)->a2(right)->a3(right)
 ## 其它
 
 ### activity之间的通信方式有哪些？
+
 - Intent
 - 类的静态变量
 - 全局变量
